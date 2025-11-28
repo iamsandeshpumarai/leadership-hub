@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.brown{
+  background-color: #82181A;
+}
+.lightbrown{
+  background-color: #C10007;
+}
