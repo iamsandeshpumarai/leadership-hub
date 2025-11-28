@@ -1,6 +1,6 @@
 import React from 'react'
 import PublishedWorks from '../Component/Bookstore/PublishedWork'
-import BooksSection from '../Component/Bookstore/Booksection'
+import BooksSection from '../Component/Bookstore/BookSection'
 import AboutAuthor from '../Component/Bookstore/AboutAuthor'
 
 const Bookstore = () => {
