@@ -8,3 +8,21 @@
 .lightbrown{
   background-color: #C10007;
 }
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+main {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+div#root{
+  margin: 0 !important;
+  padding: 0 !important;
+}

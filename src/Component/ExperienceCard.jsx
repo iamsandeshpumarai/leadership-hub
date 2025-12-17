@@ -120,10 +120,11 @@ const iconMap = {
   ),
 };
 
-const ExperienceCard = () => {
+const ExperienceCard = ({listexpn}) => {
+  console.log(listexpn,'this is the list of experience')
   return (
     <div className="grid lg:grid-cols-2 gap-8">
-      {experienceCards.map((card, index) => (
+      {listexpn?.map((card, index) => (
         <div
           key={card.id}
           className={`transform transition-all duration-1000 delay-${index * 100} translate-y-0 opacity-100`}
@@ -170,10 +171,10 @@ const ExperienceCard = () => {
                 Key Achievements
               </h4>
               <div className="space-y-2">
-                {card.achievements.map((item, idx) => (
+                {card.keyAchievements.map((item, idx) => (
                   <div key={idx} className="flex items-center text-sm text-slate-600">
                     <div className="w-1.5 h-1.5 bg-red-400 rounded-full mr-3"></div>
-                    {item}
+                    {item.text}
                   </div>
                 ))}
               </div>

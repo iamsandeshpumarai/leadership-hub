@@ -1,7 +1,8 @@
 import React from 'react'
 import ExperienceCard from './ExperienceCard'
 
-const Experience = () => {
+const Experience = ({expndata}) => {
+  console.log(expndata,"this is experience data")
     return (
         <>
         
@@ -19,69 +20,56 @@ const Experience = () => {
             <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
           </svg>
           <span class="text-red-700 font-medium text-sm tracking-wide">
-            EXPERIENCE & LEADERSHIP
+            {expndata?.headerTag}
           </span>
         </div>
 
         <h2 class="text-3xl lg:text-4xl font-light text-slate-900 mb-6">
-          A Legacy of
-          <span class="font-normal text-red-800 ml-2">Public Service</span>
+          {expndata?.headerTitle}
+          <span class="font-normal text-red-800 ml-2">{expndata?.headerHighlight}</span>
         </h2>
 
         <div class="w-16 h-0.5 bg-white0 mx-auto mb-6"></div>
 
         <p class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
-          From healthcare ministry to constitutional development, a distinguished 
-          career spanning multiple government formations and party leadership 
-          roles, dedicated to serving Nepal's democratic progress.
+          {expndata?.headerDescription}
         </p>
       </div>
 
       {/* <!-- GRID OF EXPERIENCE CARDS --> */}
      
-<ExperienceCard/>
+<ExperienceCard listexpn={expndata?.cards}/>
       {/* <!-- BOTTOM POLITICAL TIMELINE SECTION --> */}
       <div class="mt-16 bg-red-900 p-8 lg:p-12 transform transition-all duration-1000 delay-500 translate-y-0 opacity-100">
         <div class="max-w-4xl mx-auto text-center">
 
           <h3 class="text-2xl font-light text-white mb-6">
-            Political Journey &
-            <span class="font-normal text-red-200 ml-2">Party Leadership</span>
+            {expndata?.politicalFirstTitle}
+            <span class="font-normal text-red-200 ml-2">{expndata?.politicalHighlihtTitle}</span>
           </h3>
 
           <div class="w-16 h-0.5 bg-red-400 mx-auto mb-8"></div>
 
           <p class="text-red-100 leading-relaxed text-lg mb-8">
-            Giriraj Mani Pokharel's political career reflects Nepal's democratic 
-            evolution. From his early role as Vice-Chairman of Janamorcha Nepal 
-            to his ministerial appointments and eventual leadership in the Unified 
-            Communist Party of Nepal (Maoist), his journey embodies dedication to 
-            healthcare reform, constitutional development, and party unification 
-            efforts that have shaped modern Nepal.
+          {expndata?.politicalJourney}
           </p>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-
-            <div>
-              <div class="text-3xl font-light text-white mb-2">2007</div>
+{
+  expndata?.timeline.map((data,index)=>{
+    return <>
+                <div key={index}>
+              <div class="text-3xl font-light text-white mb-2">{data.year}</div>
               <div class="text-sm text-red-300 tracking-wide uppercase">
-                First Ministerial Appointment
+                {data?.label}
               </div>
             </div>
+    </>
+  })
+}
 
-            <div>
-              <div class="text-3xl font-light text-white mb-2">2008</div>
-              <div class="text-sm text-red-300 tracking-wide uppercase">
-                Constituent Assembly Election
-              </div>
-            </div>
 
-            <div>
-              <div class="text-3xl font-light text-white mb-2">2009</div>
-              <div class="text-sm text-red-300 tracking-wide uppercase">
-                Party Unification Leadership
-              </div>
-            </div>
+         
 
           </div>
 

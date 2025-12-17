@@ -1,49 +1,5 @@
 import React from "react";
 
-// Array of political positions data
-const politicalPositionsData = [
-  {
-    id: 1,
-    title: "Minister of Education, Science and Technology",
-    period: "16 March 2018 – 20 December 2020",
-    icon: "building",
-    badge: null,
-    details: [
-      { label: "President", value: "Bidhya Devi Bhandari" },
-      { label: "PM", value: "Khadga Prasad Sharma Oli" },
-      { label: "Preceded", value: "Chitra Lekha Yadav" },
-      { label: "Succeeded", value: "Dhaniram Paudel" },
-    ],
-  },
-  {
-    id: 2,
-    title: "Minister of Health and Population",
-    period: "29 April 2007 – 4 May 2009",
-    icon: "building",
-    badge: null,
-    details: [{ label: "PM", value: "Pushpa Kamal Dahal" }],
-  },
-  {
-    id: 3,
-    title: "Member of Parliament, Pratinidhi Sabha",
-    period: "4 March 2018 – Present",
-    icon: "users",
-    badge: "Incumbent",
-    details: [{ label: "Constituency", value: "Mahottari 1" }],
-  },
-  {
-    id: 4,
-    title: "Member of Constituent Assembly",
-    period: "28 May 2008 – 14 October 2017",
-    icon: "users",
-    badge: null,
-    details: [
-      { label: "Constituency", value: "Mahottari 1" },
-      { label: "Preceded", value: "Mahendra Yadav (as MP)" },
-    ],
-  },
-];
-
 // Component to render individual SVG icons
 const Icon = ({ name }) => {
   switch (name) {
@@ -101,10 +57,19 @@ const Icon = ({ name }) => {
   }
 };
 
-const PoliticalPositions = () => {
+const PoliticalPositions = ({ positions = [] }) => {
+  const processedPositions = positions.map((pos, index) => ({
+    id: index + 1,
+    title: pos.position,
+    period: pos.period,
+    icon: pos.position.toLowerCase().includes('minister') ? 'building' : 'users',
+    badge: pos.period.includes('Present') ? 'Incumbent' : null,
+    details: pos.details.map(det => ({ label: det.key, value: det.Value })),
+  }));
+
   return (
     <div className="grid lg:grid-cols-2 gap-8 mb-16">
-      {politicalPositionsData.map((position, index) => (
+      {processedPositions.map((position, index) => (
         <div
           key={position.id}
           className={`transform transition-all duration-1000 delay-${index * 100} translate-y-0 opacity-100`}

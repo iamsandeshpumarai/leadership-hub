@@ -1,22 +1,5 @@
 import React from "react";
 
-// Data for Political Affiliations
-const politicalAffiliations = [
-  { name: "CPN (Fourth Convention)", period: "until 1990" },
-  { name: "Samyukta Janamorcha", period: "1990–2002" },
-  { name: "Janamorcha Nepal", period: "2002–2009" },
-  { name: "CPN (Maoist Centre)", period: "since 2009" },
-];
-
-// Data for Key Achievements
-const keyAchievements = [
-  "Former Minister of Education, Science and Technology",
-  "Former Minister of Health and Population",
-  "Founding chairman of Adharshila",
-  "Elected to party's Standing Committee",
-  "In-charge of party's Health Department",
-];
-
 // Icon component for reuse
 const Icon = ({ type }) => {
   switch (type) {
@@ -63,7 +46,7 @@ const Icon = ({ type }) => {
   }
 };
 
-const PoliticalAffiliationsAndAchievements = () => {
+const PoliticalAffiliationsAndAchievements = ({ affiliations = [], achievements = [] }) => {
   return (
     <div className="grid lg:grid-cols-2 gap-16">
       {/* Political Affiliations Section */}
@@ -78,7 +61,7 @@ const PoliticalAffiliationsAndAchievements = () => {
           </h3>
         </div>
         <div className="space-y-4">
-          {politicalAffiliations.map((affiliation, idx) => (
+          {affiliations.map((affiliation, idx) => (
             <div key={idx} className="border-l-4 border-red-300 pl-6 pb-4">
               <h4 className="font-medium text-red-900 mb-1">{affiliation.name}</h4>
               <p className="text-red-800 text-sm">{affiliation.period}</p>
@@ -99,7 +82,7 @@ const PoliticalAffiliationsAndAchievements = () => {
           </h3>
         </div>
         <div className="space-y-4">
-          {keyAchievements.map((achievement, idx) => (
+          {achievements.map((achievement, idx) => (
             <div key={idx} className="flex items-start gap-3">
               <div className="w-2 h-2 bg-red-800 rounded-full mt-2 flex-shrink-0"></div>
               <p className="text-red-800 leading-relaxed">{achievement}</p>

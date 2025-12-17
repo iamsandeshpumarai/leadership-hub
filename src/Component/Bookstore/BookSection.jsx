@@ -1,60 +1,20 @@
-import React from "react";
+import React from 'react';
 
-// Sample book data
-const books = [
-  {
-    category: "Political Memoir",
-    title: "Healthcare Reform in Nepal",
-    subtitle: "A Minister's Journey",
-    published: "2010",
-    description:
-      "Insights from serving as Minister of Health and Population, covering policy reforms and public health initiatives.",
-    price: "NPR 1,200",
-  },
-  {
-    category: "Political Analysis",
-    title: "Constitutional Democracy",
-    subtitle: "Nepal's Democratic Transition",
-    published: "2012",
-    description:
-      "Experiences from the Constituent Assembly and the journey toward Nepal's new constitution.",
-    price: "NPR 1,500",
-  },
-  {
-    category: "Political Theory",
-    title: "Party Politics and Unity",
-    subtitle: "Lessons from Nepal's Left Movement",
-    published: "2015",
-    description:
-      "Reflections on party unification and leadership within Nepal's communist movement.",
-    price: "NPR 1,300",
-  },
-  {
-    category: "Leadership",
-    title: "Public Service Leadership",
-    subtitle: "Building Stronger Communities",
-    published: "2018",
-    description:
-      "A comprehensive guide to effective public service and community development.",
-    price: "NPR 1,400",
-  },
-];
-
-const BooksSection = () => {
+const BooksSection = ({ books }) => {
   return (
     <section className="py-20 bg-gray-50">
       <div className="w-full max-w-7xl mx-auto px-6 lg:px-8">
         {/* Grid of books */}
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-8"> {/* Consider xl:grid-cols-3 for larger screens */}
           {books.map((book, index) => (
             <div
-              key={index}
+              key={book._id} // Use real ID for React key (better than index)
               className={`transform transition-all duration-1000 delay-${index * 100} translate-y-0 opacity-100`}
             >
               {/* Book Card */}
               <div className="bg-white p-8 h-full hover:shadow-lg transition-all duration-300 border border-red-100 hover:border-red-200">
                 <div className="flex gap-6">
-                  {/* Book Cover */}
+                  {/* Book Cover - Kept as is; consider real images if schema adds imageUrl */}
                   <div className="flex-shrink-0">
                     <div className="w-32 h-40 bg-gradient-to-br from-red-100 to-red-200 border border-red-200 flex items-center justify-center">
                       <svg
@@ -78,11 +38,15 @@ const BooksSection = () => {
 
                   {/* Book Details */}
                   <div className="flex-1">
-                    {/* Category */}
-                    <div className="inline-block bg-red-50 border border-red-200 px-3 py-1 rounded-sm mb-3">
-                      <span className="text-red-700 font-medium text-xs tracking-wide uppercase">
-                        {book.category}
-                      </span>
+                    {/* Tags as Badges - At top, as requested */}
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {book.tags.map((tag, tagIndex) => (
+                        <div key={tagIndex} className="inline-block bg-red-50 border border-red-200 px-3 py-1 rounded-sm">
+                          <span className="text-red-700 font-medium text-xs tracking-wide uppercase">
+                            {tag}
+                          </span>
+                        </div>
+                      ))}
                     </div>
 
                     {/* Title and Subtitle */}
@@ -93,7 +57,7 @@ const BooksSection = () => {
                       {book.subtitle}
                     </p>
 
-                    {/* Published Date */}
+                    {/* Published Date - Extract year from Date */}
                     <div className="flex items-center text-sm text-slate-500 mb-4">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -113,18 +77,18 @@ const BooksSection = () => {
                         <rect width="18" height="18" x="3" y="4" rx="2"></rect>
                         <path d="M3 10h18"></path>
                       </svg>
-                      Published {book.published}
+                      Published {new Date(book.publishTime).getFullYear()}
                     </div>
 
                     {/* Description */}
                     <p className="text-slate-600 mb-6 leading-relaxed text-sm">
-                      {book.description}
+                      {book.publishDesc}
                     </p>
 
                     {/* Price & Buy Button */}
                     <div className="flex items-center justify-between">
                       <div className="text-xl font-medium text-red-800">
-                        {book.price}
+                        NPR {book.price.toLocaleString()} {/* Format number, assume NPR */}
                       </div>
                       <button className="bg-red-800 hover:bg-red-900 text-white px-6 py-2 font-medium tracking-wide flex items-center gap-2 transition-all duration-200 shadow-sm hover:shadow-md">
                         <svg

@@ -1,8 +1,8 @@
 import React from 'react'
 
-import profileImage from '../../assets/image/ministerphoto.jpg'
-const Herosection = () => {
-  return (
+const Herosection = ({herodata}) => {
+console.log(herodata ,"this is the hero data")
+    return (
      <div className=" font-sans p-4 md:p-8 mt-[70px]">
             <div className="max-w-7xl mx-auto  rounded-xl overflow-hidden ">
                 {/* MAIN LAYOUT CONTAINER
@@ -19,40 +19,45 @@ const Herosection = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1 fill-current" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                             </svg>
-                            Nepalese Politician
+                            {herodata ?  herodata?.tag :"Nepalese Politicians"}
                         </div>
 
                         {/* Title Block */}
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-800 leading-tight">
-                            Giriraj Mani 
-                            <span className="text-red-700">Pokharel</span>
+                             {herodata ?  herodata?.firstName :"Giriraj Mani"}
+                            <span className="text-red-700">{herodata?.nameHighlight}</span>
                         </h1>
                         <p className="text-xl font-medium text-gray-700">
-                            Former Minister & Constitutional Assembly Member
+                            {herodata?.subtitle}
                         </p>
 
                         {/* Description */}
                         <p className="text-lg text-gray-500 max-w-lg">
-                            Bringing decades of dedicated public service experience in healthcare, education, and constitutional development to build stronger communities and transparent governance.
+                          {herodata?.description}
                         </p>
 
                         {/* Stats Cards */}
                         <div className="grid grid-cols-3 gap-4 pt-4">
                             {/* Stat 1 */}
-                            <div className="p-4 rounded-lg border border-gray-100 bg-white transition duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg">
-                                <p className="text-3xl font-bold text-red-700">15+</p>
+                            
+ <div  className="p-4 rounded-lg border border-gray-100 bg-white transition duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg">
+                                <p className="text-3xl font-bold text-red-700">{herodata?.stats[0]?.years}</p>
+                                
                                 <p className="text-xs font-medium uppercase text-gray-500 mt-1">Years Service</p>
                             </div>
-                            {/* Stat 2 */}
-                            <div className="p-4 rounded-lg border border-gray-100 bg-white transition duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg">
-                                <p className="text-3xl font-bold text-red-700">3</p>
-                                <p className="text-xs font-medium uppercase text-gray-500 mt-1">Ministerial Terms</p>
+                            
+ <div  className="p-4 rounded-lg border border-gray-100 bg-white transition duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg">
+                                <p className="text-3xl font-bold text-red-700">{herodata?.stats[0]?.terms}</p>
+                                <p className="text-xs font-medium uppercase text-gray-500 mt-1">Ministerial Terms </p>
                             </div>
-                            {/* Stat 3 */}
-                            <div className="p-4 rounded-lg border border-gray-100 bg-white transition duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg">
-                                <p className="text-3xl font-bold text-red-700">Multiple</p>
+                            
+ <div  className="p-4 rounded-lg border border-gray-100 bg-white transition duration-300 hover:transform hover:-translate-y-1 hover:shadow-lg">
+                                <p className="text-3xl font-bold text-red-700">{herodata?.stats[0]?.roles}</p>
                                 <p className="text-xs font-medium uppercase text-gray-500 mt-1">Leadership Roles</p>
                             </div>
+                            
+                           
+                            
                         </div>
 
                         {/* Action Buttons */}
@@ -76,7 +81,7 @@ const Herosection = () => {
                         
                         {/* Image Tag */}
                         <img 
-                            src={profileImage} 
+                            src={herodata?.imageUrl} 
                             alt="Placeholder image representing a public servant's profile" 
                             className="w-full h-full object-cover"
                             onError={(e) => {
@@ -88,9 +93,10 @@ const Herosection = () => {
                         {/* ABSOLUTE DIV: Image Caption/Footnote */}
                         {/* This div uses 'absolute bottom-0 left-0 w-full' to ensure it sticks to the bottom */}
                         <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-70 text-white p-4">
-                            <p className="font-bold text-sm">Giriraj Mani Pokharel</p>
+                            <p className="font-bold text-sm">{herodata?.captionName}</p>
                             <p className="text-xs mt-1 text-gray-300">
-                                Former Minister of Education, Science, Technology, Health, PopulationMember of Constitutional Assembly and founding chairman Adharshila.
+                                {herodata?.imageDesc
+}
                             </p>
                         </div>
                     </div>

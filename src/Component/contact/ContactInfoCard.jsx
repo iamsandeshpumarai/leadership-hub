@@ -1,17 +1,20 @@
-import React from "react";
+import React from 'react';
 
-// Single Card Component
+// Single Card Component (remains the same)
 const ContactInfoCard = ({ icon, title, items }) => {
   return (
-    <div className="transform transition-all duration-1000 tranred-y-0 opacity-100">
+    <div className="transform transition-all duration-1000 translate-y-0 opacity-100">
       <div className="bg-white p-6 border border-red-200 hover:shadow-lg transition-all duration-300 h-full">
         <div className="bg-red-100 p-3 w-fit mb-4">{icon}</div>
         <h3 className="text-lg font-medium text-red-800 mb-3">{title}</h3>
         <div className="space-y-2">
-          {items.map((item, idx) => (
-            <p key={idx} className="text-red-600 text-sm leading-relaxed">
-              {item}
-            </p>
+          {/* Ensure items are displayed, even if it's a single summary line */}
+          {items.map((item, idx) => ( 
+            // We use dangerouslySetInnerHTML here to render newlines from the summary fields as <br> tags
+            <p key={idx} 
+               className="text-red-600 text-sm leading-relaxed" 
+               dangerouslySetInnerHTML={{ __html: item.replace(/\n/g, '<br />') }} 
+            />
           ))}
         </div>
       </div>
@@ -19,13 +22,57 @@ const ContactInfoCard = ({ icon, title, items }) => {
   );
 };
 
-// Main Component
-const ContactInfoSection = () => {
-  // Data array for mapping
-  const contactData = [
+// Main Component with logic to prioritize summary fields for hours
+const ContactInfoSection = ({ contactData }) => {
+  console.log(contactData)
+
+  // 1. Office Address 
+  const officeAddressItems = [
+    contactData?.officeAddress,
+    contactData?.cityState,
+    contactData?.province,
+  ].filter(Boolean); 
+
+  // 2. Phone Numbers: Handled correctly
+  const phoneItems = contactData?.phoneNumbers?.map(
+    (p) => `${p.number} (${p.type || 'Office'})`
+  ) || [];
+
+  // 3. Email Addresses: Handled correctly
+  const emailItems = contactData?.emails?.map((e) => e.address) || [];
+
+  // 4. Office Hours: NEW LOGIC - Prioritize Summary fields
+  let hoursItems = [];
+  const hoursSummary = contactData?.hoursSummary;
+  const closedDaysSummary = contactData?.closedDaysSummary;
+
+  if (hoursSummary || closedDaysSummary) {
+      // Use the simplified summary fields if at least one is present
+      if (hoursSummary && hoursSummary.trim() !== "") {
+          hoursItems.push(`${hoursSummary}`);
+      }
+      if (closedDaysSummary && closedDaysSummary.trim() !== "") {
+          hoursItems.push(`**Closed:**\n${closedDaysSummary}`);
+      }
+  } else if (contactData?.officeHours) {
+      // FALLBACK: Use the detailed per-day array if summaries are missing/empty
+      hoursItems = contactData.officeHours.map((h) =>
+          h.isClosed ? `${h.day}: Closed` : `${h.day}: ${h.openTime} - ${h.closeTime}`
+      );
+  }
+  
+  // Default to a general message if no data is available
+  if (hoursItems.length === 0) {
+      hoursItems = ["Hours information currently unavailable."];
+  }
+
+
+  // Data array for mapping 
+  const contactCards = [
     {
-      title: "Office Address",
+      title: 'Office Address',
       icon: (
+        // SVG for Building Icon
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -50,11 +97,12 @@ const ContactInfoSection = () => {
           <path d="M8 14h.01"></path>
         </svg>
       ),
-      items: ["Political Office", "Kathmandu, Nepal", "Bagmati Province"],
+      items: officeAddressItems,
     },
     {
-      title: "Phone Numbers",
+      title: 'Phone Numbers',
       icon: (
+        // SVG for Phone Icon
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -69,11 +117,12 @@ const ContactInfoSection = () => {
           <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path>
         </svg>
       ),
-      items: ["+977-1-XXXXXXX (Office)", "+977-98XXXXXXXX (Mobile)", "+977-1-XXXXXXX (Fax)"],
+      items: phoneItems,
     },
     {
-      title: "Email Addresses",
+      title: 'Email Addresses',
       icon: (
+        // SVG for Mail Icon
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -89,11 +138,12 @@ const ContactInfoSection = () => {
           <rect x="2" y="4" width="20" height="16" rx="2"></rect>
         </svg>
       ),
-      items: ["office@girirajmanipokharel.np", "info@girirajmanipokharel.np", "media@girirajmanipokharel.np"],
+      items: emailItems,
     },
     {
-      title: "Office Hours",
+      title: 'Office Hours',
       icon: (
+        // SVG for Clock Icon
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -109,12 +159,12 @@ const ContactInfoSection = () => {
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
       ),
-      items: ["Monday - Friday: 9:00 AM - 5:00 PM", "Saturday: 10:00 AM - 2:00 PM", "Sunday: Closed"],
+      items: hoursItems,
     },
   ];
 
   return (
-    <section className=" bg-[#F8FAFC] py-10">
+    <section className="bg-[#F8FAFC] py-10">
       <div className="w-full max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16 transform transition-all duration-1000 translate-y-0 opacity-100">
@@ -129,7 +179,7 @@ const ContactInfoSection = () => {
 
         {/* Contact Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-          {contactData.map((contact, idx) => (
+          {contactCards.map((contact, idx) => (
             <ContactInfoCard key={idx} {...contact} />
           ))}
         </div>

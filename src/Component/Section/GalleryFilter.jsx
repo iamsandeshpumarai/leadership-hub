@@ -1,79 +1,12 @@
 import React, { useState } from "react";
 
-// Sample gallery data
-const galleryData = [
-  {
-    id: 1,
-    title: "Minister Inauguration Ceremony",
-    description: "Official inauguration ceremony as Minister of Health and Population",
-    category: "Ministerial",
-    year: 2007,
-    location: "Kathmandu",
-    image: "https://images.unsplash.com/photo-1540910419892-4308a4ac95db?w=500&h=300&fit=crop",
-  },
-  {
-    id: 2,
-    title: "Constituent Assembly Session",
-    description: "Participating in constitutional development discussions",
-    category: "Constitutional",
-    year: 2008,
-    location: "Constituent Assembly Hall",
-    image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=500&h=300&fit=crop",
-  },
-  {
-    id: 3,
-    title: "Healthcare Policy Meeting",
-    description: "Strategic healthcare policy development session",
-    category: "Policy Work",
-    year: 2008,
-    location: "Ministry Office",
-    image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=500&h=300&fit=crop",
-  },
-  {
-    id: 4,
-    title: "Community Health Program Launch",
-    description: "Launching community healthcare initiatives in rural areas",
-    category: "Community",
-    year: 2008,
-    location: "Mahottari District",
-    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=500&h=300&fit=crop",
-  },
-  {
-    id: 5,
-    title: "Party Leadership Meeting",
-    description: "Strategic party leadership discussions",
-    category: "Party Leadership",
-    year: 2009,
-    location: "Party Headquarters",
-    image: "https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=500&h=300&fit=crop",
-  },
-  {
-    id: 6,
-    title: "Educational Reform Speech",
-    description: "Addressing educational reform initiatives",
-    category: "Education",
-    year: 2009,
-    location: "Education Ministry",
-    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9d1?w=500&h=300&fit=crop",
-  },
-];
+const GalleryFilter = ({ galleryData }) => {
+  const [activeCategory, setActiveCategory] = useState("All");
 
-// GalleryFilter Component
-const GalleryFilter = () => {
-  const [activeCategory, setActiveCategory] = useState("All"); // Track selected category
+  // Extract unique categories from the data
+  const categories = ["All", ...new Set(galleryData.map((item) => item.category))];
 
-  // Categories for buttons
-  const categories = [
-    "All",
-    "Ministerial",
-    "Constitutional",
-    "Policy Work",
-    "Community",
-    "Party Leadership",
-    "Education",
-  ];
-
-  // Filter gallery data based on active category
+  // Filter data based on active category
   const filteredData =
     activeCategory === "All"
       ? galleryData
@@ -101,78 +34,80 @@ const GalleryFilter = () => {
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredData.map((event) => (
-            <div
-              key={event.id}
-              className="group cursor-pointer transform transition-all duration-500 opacity-100"
-            >
-              <div className="bg-white border border-red-100 overflow-hidden hover:shadow-xl transition-all duration-300 hover:border-red-200">
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <img
-                    alt={event.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    src={event.image}
-                  />
-                  <div className="absolute inset-0 bg-red-900/0 group-hover:bg-red-900/20 transition-all duration-300"></div>
-                  <div className="absolute top-4 left-4">
-                    <span className="bg-red-800 text-white px-3 py-1 text-xs font-medium tracking-wide uppercase">
-                      {event.category}
-                    </span>
-                  </div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-medium text-slate-900 mb-3 group-hover:text-red-800 transition-colors">
-                    {event.title}
-                  </h3>
-                  <p className="text-slate-600 mb-4 leading-relaxed">
-                    {event.description}
-                  </p>
-                  <div className="space-y-2">
-                    <div className="flex items-center text-sm text-slate-500">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-calendar w-4 h-4 mr-2 text-red-500"
-                        aria-hidden="true"
-                      >
-                        <path d="M8 2v4"></path>
-                        <path d="M16 2v4"></path>
-                        <rect width="18" height="18" x="3" y="4" rx="2"></rect>
-                        <path d="M3 10h18"></path>
-                      </svg>
-                      {event.year}
+          {filteredData.length === 0 ? (
+            <p className="text-center col-span-full text-gray-500">No items to display</p>
+          ) : (
+            filteredData.map((event) => (
+              <div
+                key={event._id} // Use MongoDB _id as key
+                className="group cursor-pointer transform transition-all duration-500 opacity-100"
+              >
+                <div className="bg-white border border-red-100 overflow-hidden hover:shadow-xl transition-all duration-300 hover:border-red-200">
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <img
+                      alt={event.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      src={event.image} // API image
+                    />
+                    <div className="absolute inset-0 bg-red-900/0 group-hover:bg-red-900/20 transition-all duration-300"></div>
+                    <div className="absolute top-4 left-4">
+                      <span className="bg-red-800 text-white px-3 py-1 text-xs font-medium tracking-wide uppercase">
+                        {event.category} {/* API category */}
+                      </span>
                     </div>
-                    <div className="flex items-center text-sm text-slate-500">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="lucide lucide-map-pin w-4 h-4 mr-2 text-red-500"
-                        aria-hidden="true"
-                      >
-                        <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
-                        <circle cx="12" cy="10" r="3"></circle>
-                      </svg>
-                      {event.location}
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-medium text-slate-900 mb-3 group-hover:text-red-800 transition-colors">
+                      {event.title}
+                    </h3>
+                    <p className="text-slate-600 mb-4 leading-relaxed">{event.description}</p>
+                    <div className="space-y-2">
+                      <div className="flex items-center text-sm text-slate-500">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="lucide lucide-calendar w-4 h-4 mr-2 text-red-500"
+                          aria-hidden="true"
+                        >
+                          <path d="M8 2v4"></path>
+                          <path d="M16 2v4"></path>
+                          <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                          <path d="M3 10h18"></path>
+                        </svg>
+                        {event.year} {/* API year */}
+                      </div>
+                      <div className="flex items-center text-sm text-slate-500">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="lucide lucide-map-pin w-4 h-4 mr-2 text-red-500"
+                          aria-hidden="true"
+                        >
+                          <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+                          <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        {event.location} {/* API location */}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </section>
