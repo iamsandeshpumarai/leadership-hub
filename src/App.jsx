@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Header } from './Component/Header/Header';
 import Footer from './Component/footer/footer';
 import Home from './page/Home';
@@ -19,12 +19,10 @@ import AdminContactPanel from './Component/Admin/AdminContact';
 import AdminHomePanel from './Component/Admin/AdminHome';
 import AdminBookStorePanel from './Component/Admin/AdminBookStore';
 import AdminLogin from './Component/Admin/AdminLogin';
-import {ProtectRoute} from './Context/ProtectRoute';
+import { ProtectRoute } from './Context/ProtectRoute';
 import { Toaster } from 'react-hot-toast';
 
-const App = () => {
-
-
+const AppContent = () => {
   const { pathname } = useLocation();
   const Adminlogin = pathname === "/login" || pathname.startsWith("/admin");
 
@@ -34,11 +32,11 @@ const App = () => {
       <ScrollToTop/>
       {!Adminlogin && <Header/>}
 
-      <main className="">
+      <main>
         <Routes>
           {/* Public routes */}
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={ <AdminLogin/>  } />
+          <Route path="/login" element={<AdminLogin />} />
           <Route path="/biography" element={<Biography />} />
           <Route path="/events" element={<Events />} />
           <Route path="/gallery" element={<Gallery />} />
@@ -69,6 +67,14 @@ const App = () => {
 
       {!Adminlogin && <Footer />}
     </div>
+  );
+};
+
+const App = () => {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 };
 
