@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { , Routes, Route, useLocation } from 'react-router-dom';
 import { Header } from './Component/Header/Header';
 import Footer from './Component/footer/footer';
 import Home from './page/Home';
@@ -19,56 +19,56 @@ import AdminContactPanel from './Component/Admin/AdminContact';
 import AdminHomePanel from './Component/Admin/AdminHome';
 import AdminBookStorePanel from './Component/Admin/AdminBookStore';
 import AdminLogin from './Component/Admin/AdminLogin';
-import { ProtectRoute } from './Context/ProtectRoute';
+import {ProtectRoute} from './Context/ProtectRoute';
 import { Toaster } from 'react-hot-toast';
 
 const App = () => {
+
+
   const { pathname } = useLocation();
   const Adminlogin = pathname === "/login" || pathname.startsWith("/admin");
 
   return (
-    <HashRouter>
-      <div>
-        <Toaster position='top-right' />
-        <ScrollToTop />
-        {!Adminlogin && <Header />}
+    <div>
+      <Toaster position='top-right'/>
+      <ScrollToTop/>
+      {!Adminlogin && <Header/>}
 
-        <main>
-          <Routes>
-            {/* Public routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<AdminLogin />} />
-            <Route path="/biography" element={<Biography />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/news" element={<LatestNews />} />
-            <Route path="/contact" element={<Contactpage />} />
-            <Route path="/bookstore" element={<Bookstore />} />
+      <main className="">
+        <Routes>
+          {/* Public routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={ <AdminLogin/>  } />
+          <Route path="/biography" element={<Biography />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/news" element={<LatestNews />} />
+          <Route path="/contact" element={<Contactpage />} />
+          <Route path="/bookstore" element={<Bookstore />} />
 
-            {/* Admin routes */}
-            <Route
-              path="/admin"
-              element={
-                <ProtectRoute>
-                  <AdminLayout />
-                </ProtectRoute>
-              }
-            >
-              <Route index element={<AdminDashboard />} />
-              <Route path="biography" element={<AdminBiography />} />
-              <Route path="news" element={<AdminNewsPanel />} />
-              <Route path="events" element={<AdminEventsPanel />} />
-              <Route path="gallery" element={<AdminGalleryPanel />} />
-              <Route path="contact" element={<AdminContactPanel />} />
-              <Route path="homes" element={<AdminHomePanel />} />
-              <Route path="bookstore" element={<AdminBookStorePanel />} />
-            </Route>
-          </Routes>
-        </main>
+          {/* Admin routes */}
+          <Route 
+            path="/admin" 
+            element={
+              <ProtectRoute>
+                <AdminLayout />
+              </ProtectRoute>
+            }
+          >
+            <Route index element={<AdminDashboard />} />
+            <Route path="biography" element={<AdminBiography />} />
+            <Route path="news" element={<AdminNewsPanel />} />
+            <Route path="events" element={<AdminEventsPanel />} />
+            <Route path="gallery" element={<AdminGalleryPanel />} />
+            <Route path="contact" element={<AdminContactPanel />} />
+            <Route path="homes" element={<AdminHomePanel />} />
+            <Route path="bookstore" element={<AdminBookStorePanel />} />
+          </Route>
+        </Routes>
+      </main>
 
-        {!Adminlogin && <Footer />}
-      </div>
-    </HashRouter>
+      {!Adminlogin && <Footer />}
+    </div>
   );
 };
 
