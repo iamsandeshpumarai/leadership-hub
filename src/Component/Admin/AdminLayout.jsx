@@ -29,8 +29,9 @@ const AdminLayout = () => {
     { name: "News", path: "/admin/news" },
     { name: "Events", path: "/admin/events" },
     { name: "Gallery", path: "/admin/gallery" },
-    { name: "Contact Info", path: "/admin/contact" },
     { name: "Bookstore", path: "/admin/bookstore" },
+    { name: "Contact Info", path: "/admin/contact" },
+    { name: "Setting", path: "/admin/setting" },
   ];
 
   return (

@@ -1,8 +1,16 @@
 import React from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { Link, useNavigate } from 'react-router-dom'; // Import Link for navigation
+import { useQuery } from '@tanstack/react-query';
+import { contactDatas } from '../../../utils/fetchData';
 
 function Footer() {
+
+  const {data} =   useQuery({
+  queryKey:['contactinfo'],
+  queryFn: contactDatas
+})
+
   return (
     <footer className="bg-[#82181A] text-white p-8 text-left">
       <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -57,19 +65,19 @@ function Footer() {
             <li className="flex items-start">
               <Mail className="w-4 h-4 mr-3 mt-1 text-[#FF4930] flex-shrink-0" />
               <a href="mailto:contact@girirajpokhrel.com" className="text-gray-200 hover:text-[#FF4930] transition duration-300">
-                contact@girirajpokhrel.com
+{data?.data?.data.footerGmail}
               </a>
             </li>
             <li className="flex items-start">
               <Phone className="w-4 h-4 mr-3 mt-1 text-[#FF4930] flex-shrink-0" />
               <a href="tel:+15551234567" className="text-gray-200 hover:text-[#FF4930] transition duration-300">
-                (555) 123-4567
+                {data?.data?.data.footerPhone}
               </a>
             </li>
             <li className="flex items-start">
               <MapPin className="w-4 h-4 mr-3 mt-1 text-[#FF4930] flex-shrink-0" />
               <span className="text-gray-200">
-                Campaign Office, Main Street, City
+                {data?.data?.data.footerLocation}
               </span>
             </li>
           </ul>
@@ -80,9 +88,9 @@ function Footer() {
       <div className="mt-8 pt-4 border-t border-primary-800 text-sm md:flex justify-between text-white">
         <div>© 2025 Giriraj Mani Pokhrel. All rights reserved.</div>
         <div className="md:flex gap-2 text-white block">
-          <Link to="/privacy-policy" className="hover:text-[#FF4930]">Privacy Policy</Link>
-          <Link to="/terms-of-service" className="hover:text-[#FF4930]">Terms of Service</Link>
-          <Link to="/campaign-finance-disclaimer" className="hover:text-[#FF4930]">Campaign Finance Disclaimer</Link>
+          <Link to="/"  className="hover:text-[#FF4930]">Privacy Policy</Link>
+          <Link to="/" className="hover:text-[#FF4930]">Terms of Service</Link>
+          <Link to="/" className="hover:text-[#FF4930]">Campaign Finance Disclaimer</Link>
         </div>
       </div>
     </footer>

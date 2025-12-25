@@ -47,6 +47,6 @@ export const fetchAuthorData = async function getAuthorData(){ const data = awai
 
 
  export const logInMutation = async (datas)=>{
- const data =  api.post("/login",datas)
-   return data
+const res = await api.post('/login', datas);
+return res.data
  }

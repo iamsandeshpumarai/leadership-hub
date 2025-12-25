@@ -21,6 +21,7 @@ import AdminBookStorePanel from './Component/Admin/AdminBookStore';
 import AdminLogin from './Component/Admin/AdminLogin';
 import {ProtectRoute} from './Context/ProtectRoute';
 import { Toaster } from 'react-hot-toast';
+import Setting from './Component/Admin/Setting';
 
 const App = () => {
 
@@ -57,6 +58,7 @@ const App = () => {
           >
             <Route index element={<AdminDashboard />} />
             <Route path="biography" element={<AdminBiography />} />
+            <Route path="setting" element={<Setting />} />
             <Route path="news" element={<AdminNewsPanel />} />
             <Route path="events" element={<AdminEventsPanel />} />
             <Route path="gallery" element={<AdminGalleryPanel />} />

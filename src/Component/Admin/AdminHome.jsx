@@ -246,11 +246,14 @@ const AdminHomePanel = () => {
     const { data, isLoading, error } = useQuery({
         queryKey: ['homedata'],
         queryFn: fetchHomeData,
+
     });
 
     // Populate states
     useEffect(() => {
         if (data) {
+            toast.success(data?.message);
+            console.log(data,"is the fetched data")
             const fetchedHero = data.data[0].hero || {};
             setHero({
                 tag: fetchedHero.tag || '', firstName: fetchedHero.firstName || '', nameHighlight: fetchedHero.nameHighlight || '',
@@ -313,6 +316,7 @@ const AdminHomePanel = () => {
                 tag: hero.tag, firstName: hero.firstName, nameHighlight: hero.nameHighlight, position: hero.position,
                 description: hero.description, stats: [hero.stats], buttonData: [],
                 captionName: hero.captionName, imageDesc: hero.imageDesc,
+                imageUrl: hero.imageUrl,
             },
             experience: { // Note: experience also contains political journey fields as per original payload
                 headerTag: experience.headerTag, headerHalfTitle: experience.headerHalfTitle,
@@ -332,6 +336,7 @@ const AdminHomePanel = () => {
         const formData = new FormData();
         if (hero.imageFile) formData.append('herosecimage', hero.imageFile);
         formData.append('data', JSON.stringify(payload));
+
 
         const savePromise = api.put('/home/updatehomedata', formData, {
             headers: { 'Content-Type': 'multipart/form-data' },

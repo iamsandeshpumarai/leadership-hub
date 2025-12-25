@@ -86,7 +86,14 @@ const NewsEditCard = ({ news, index, onUpdate, onDelete, onSave }) => {
                 onChange={(e) => onUpdate(index, "date", e.target.value)}
                 className="border border-gray-300 p-3 w-full rounded-lg focus:ring-blue-500 focus:border-blue-500"
             />
-
+            {/* social media url  */}
+<input
+                type="text"
+                placeholder="News URL"
+                value={news.newsurl || ""}
+                onChange={(e) => onUpdate(index, "newsurl", e.target.value)}
+                className="border border-gray-300 p-3 w-full rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            />
             {/* Description Textarea */}
             <textarea
                 placeholder="Description"
@@ -126,6 +133,7 @@ const AdminNewsPanel = () => {
         title: "",
         date: "",
         description: "",
+        newsurl:""
     });
 
     // 1. Fetch Data using useQuery
@@ -152,7 +160,7 @@ const AdminNewsPanel = () => {
             toast.success("News added successfully!");
             // Prepend the new item (from server response) to the local list
             setNewsList(prev => [response.data.data, ...prev]); 
-            setNewNews({ title: "", date: "", description: "" });
+            setNewNews({ title: "", date: "", description: "",newsurl:"" });
             // Invalidate the query to keep cached data fresh
             queryClient.invalidateQueries(["newsdata"]);
         },
@@ -202,7 +210,7 @@ const AdminNewsPanel = () => {
     // --- Handlers using Mutations ---
 
     const handleAddNews = () => {
-        if (!newNews.title || !newNews.description || !newNews.date) {
+        if (!newNews.title || !newNews.description || !newNews.date || !newNews.newsurl) {
             return toast.error("Fill all fields for the new news item!");
         }
         addMutation.mutate(newNews);
@@ -266,12 +274,19 @@ const AdminNewsPanel = () => {
                 </div>
                 
                 <textarea
-                    placeholder="Description (Supports Markdown/HTML if your backend allows)"
+                    placeholder="Description for the news item"
                     rows={4}
                     value={newNews.description}
                     onChange={(e) => setNewNews({ ...newNews, description: e.target.value })}
                     className="border p-3 rounded-lg w-full min-h-[100px] focus:ring-blue-500 focus:border-blue-500"
                 />
+                <input 
+    type="text" 
+    placeholder="URL for event news (e.g., https://...)" 
+    className="w-[100%] border p-3 rounded-lg focus:ring-blue-500 focus:border-blue-500" 
+    value={newNews.newsurl}
+    onChange={(e) => setNewNews({ ...newNews, newsurl: e.target.value })} // ADD THIS LINE
+/>
             </section>
 
             {/* Existing News Section */}

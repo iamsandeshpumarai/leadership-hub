@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
     data: user,isLoading} = useQuery({
     queryKey: ["auth"],
     queryFn: async () => {
-      const res = await api.get("/check");
+      const res = await api.get("/check",{withCredentials:true});
       return res.data;
     },
       refetchOnWindowFocus: false,

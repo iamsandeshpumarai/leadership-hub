@@ -11,7 +11,7 @@ const LatestNews = () => {
   queryKey:["newsdata"],
   queryFn: fetchNews
  })
- console.log(data,"is the data")
+ console.log(data?.data?.data,"is the data")
  if(isLoading) <Loading/>
   return (
     <>

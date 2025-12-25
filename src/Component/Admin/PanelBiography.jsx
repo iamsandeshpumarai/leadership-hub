@@ -10,7 +10,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const fallbackBasicInfo = {
     nameFirst: 'Giriraj Mani',
     nameLast: 'Pokharel',
-    born: '6 March 1958 (age 67)',
+    born: '6 March 1958',
     birthplace: 'Khotang, Nepal',
     residence: 'Kathmandu, Nepal',
     bioParagraph: 'A distinguished Nepalese politician who has served as Minister of Education, Science and Technology, and Minister of Health and Population. Currently serving as Member of Parliament and founding chairman of Adharshila.',
@@ -118,12 +118,14 @@ const AdminBiographyPanel = () => {
             if (bioData) {
                 // ... (Data mapping logic remains the same)
                 const profile = bioData.profile;
+
+                console.log(typeof profile?.birthDate)
                 const stats = bioData.stats;
 
                 setBasicInfo({
                     nameFirst: profile?.firstName || fallbackBasicInfo.nameFirst,
                     nameLast: profile?.lastName || fallbackBasicInfo.nameLast,
-                    born: profile?.birthDate || fallbackBasicInfo.born,
+                    born: profile?.birthDate.split(" ").slice(0,3).join(" "),
                     birthplace: profile?.birthPlace || fallbackBasicInfo.birthplace,
                     residence: profile?.residence || fallbackBasicInfo.residence,
                     bioParagraph: bioData.biographyDesc || fallbackBasicInfo.bioParagraph,
@@ -291,7 +293,8 @@ const AdminBiographyPanel = () => {
                 photoUrl: basicInfo.imageUrl,
                 birthDate: basicInfo.born,
                 birthPlace: basicInfo.birthplace,
-                residence: basicInfo.residence
+                residence: basicInfo.residence,
+                
             },
             biographyDesc: basicInfo.bioParagraph,
             stats: {

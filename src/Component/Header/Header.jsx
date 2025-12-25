@@ -1,12 +1,13 @@
 // Header.jsx
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X, ShoppingCart, ChevronDown } from 'lucide-react';
 
 /**
  * Dropdown menu for Events in desktop view
  */
 export const DropdownMenu = ({ isEventsHovered, setIsEventsHovered }) => (
+  
   <div 
     className="relative h-full flex items-center"
     onMouseEnter={() => setIsEventsHovered(true)}

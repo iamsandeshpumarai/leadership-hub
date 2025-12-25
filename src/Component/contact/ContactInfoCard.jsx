@@ -35,7 +35,7 @@ const ContactInfoSection = ({ contactData }) => {
 
   // 2. Phone Numbers: Handled correctly
   const phoneItems = contactData?.phoneNumbers?.map(
-    (p) => `${p.number} (${p.type || 'Office'})`
+    (p) => `${p.number} `
   ) || [];
 
   // 3. Email Addresses: Handled correctly
@@ -52,7 +52,7 @@ const ContactInfoSection = ({ contactData }) => {
           hoursItems.push(`${hoursSummary}`);
       }
       if (closedDaysSummary && closedDaysSummary.trim() !== "") {
-          hoursItems.push(`**Closed:**\n${closedDaysSummary}`);
+          hoursItems.push(`${closedDaysSummary}`);
       }
   } else if (contactData?.officeHours) {
       // FALLBACK: Use the detailed per-day array if summaries are missing/empty

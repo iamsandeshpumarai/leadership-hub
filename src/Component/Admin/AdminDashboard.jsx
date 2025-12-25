@@ -34,7 +34,7 @@ const AdminDashboard = () => {
 useEffect(() => {
   Promise.all([
     fetch("https://backendleadershiphub-2.onrender.com/event/getevent").then(r => r.json()),
-    fetch("https://backendleadershiphub-2.onrender.com/getdata").then(r => r.json()),
+    fetch("https://backendleadershiphub-2.onrender.com/gallery/getdata").then(r => r.json()),
     fetch("https://backendleadershiphub-2.onrender.com/store").then(r => r.json()),
     fetch("https://backendleadershiphub-2.onrender.com/news/getnews").then(r => r.json())
   ])

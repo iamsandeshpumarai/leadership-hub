@@ -1,7 +1,8 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
-const Herosection = ({herodata}) => {
-console.log(herodata ,"this is the hero data")
+const Herosection = ({herodata}) => { 
+const navigate = useNavigate()
     return (
      <div className=" font-sans p-4 md:p-8 mt-[70px]">
             <div className="max-w-7xl mx-auto  rounded-xl overflow-hidden ">
@@ -62,7 +63,7 @@ console.log(herodata ,"this is the hero data")
 
                         {/* Action Buttons */}
                         <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
-                            <button className="flex items-center justify-center px-8 py-3 bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:bg-red-800 transition duration-300">
+                            <button onClick={()=>{navigate('/biography')}} className="flex items-center justify-center px-8 py-3 bg-red-700 text-white font-semibold rounded-lg shadow-lg hover:bg-red-800 transition duration-300">
                                 Learn More
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                                     <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
