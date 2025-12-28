@@ -31,6 +31,7 @@ const AdminLayout = () => {
     { name: "Gallery", path: "/admin/gallery" },
     { name: "Bookstore", path: "/admin/bookstore" },
     { name: "Contact Info", path: "/admin/contact" },
+    { name: "Inquiry Messages", path: "/admin/inquiry" },
     { name: "Setting", path: "/admin/setting" },
   ];
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import api from "../../../utils/api";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 // --- Utility Functions ---
 
@@ -246,7 +246,7 @@ const AdminEventsPanel = () => {
 
     return (
         <div className="max-w-7xl mx-auto p-8 bg-gray-50 min-h-screen space-y-10">
-            <Toaster position="top-right" />
+            
             
             <h2 className="text-4xl font-extrabold text-blue-900 text-center border-b-4 border-blue-200 pb-4">
                 🗓️ Admin Events Panel

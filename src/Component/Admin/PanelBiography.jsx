@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import api from '../../../utils/api';
 import { v4 as uuidv4 } from 'uuid';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 // --- I. Fallbacks & Initial State (Same) ---
 // ... (Your existing fallbacks go here)
@@ -608,14 +608,14 @@ const AdminBiographyPanel = () => {
 
     return (
         <div className="max-w-7xl mx-auto p-4 md:p-8 bg-gray-100 min-h-screen">
-            <Toaster position="top-right" reverseOrder={false} />
+            
             <h1 className="text-3xl md:text-4xl font-extrabold text-blue-900 text-center border-b-4 border-blue-300 pb-4 mb-8 shadow-md bg-white p-4 rounded-xl">
                 ✍️ Admin Panel - Edit Biography
             </h1>
 
             <form onSubmit={handleSubmit} className="space-y-8">
                 {/* Tab Navigation */}
-                <div className="bg-white p-4 rounded-xl shadow-lg sticky top-0 z-10">
+                <div className="bg-white p-4 rounded-xl shadow-lg sticky top-[-24px] z-10">
                     <div className="flex flex-wrap justify-center gap-2 md:gap-4 border-b border-gray-200 pb-2">
                         {tabList.map((tab) => (
                             <button
@@ -640,7 +640,7 @@ const AdminBiographyPanel = () => {
                 </section>
 
                 {/* Final Save Button & Message - Always visible */}
-                <div className="pt-6 border-t border-blue-200 sticky bottom-0 z-10 bg-gray-100 p-4 shadow-top rounded-t-xl">
+                <div className="pt-6 border-t border-blue-200 sticky bottom-[-32px] z-10 bg-gray-100 p-4 shadow-top rounded-t-xl">
                     <button
                         type="submit"
                         disabled={loading}

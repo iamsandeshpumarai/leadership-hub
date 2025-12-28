@@ -56,6 +56,7 @@ return {...prev , event:{...prev.event,count:event.data.length},news:{...prev.ne
 
   return (
     <div className="space-y-6">
+      
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         
@@ -70,7 +71,7 @@ return {...prev , event:{...prev.event,count:event.data.length},news:{...prev.ne
             </div>
           </div>
           <div
-            key={stats.news.title}
+            key={stats?.news.title}
             className="bg-white shadow rounded-lg p-5 flex items-center space-x-4"
           >
             <div className="text-blue-500">{stats?.news.icon}</div>
@@ -130,7 +131,7 @@ return {...prev , event:{...prev.event,count:event.data.length},news:{...prev.ne
             {News?.map((news) => (
               <li key={news.id} className="border-b pb-2">
                 <p className="font-medium">{news.title}</p>
-                <p className="text-gray-500 text-sm">{news.date}</p>
+                <p className="text-gray-500 text-sm">{news.date.split("T")[0].toString()}</p>
               </li>
             ))}
           </ul>
@@ -138,12 +139,14 @@ return {...prev , event:{...prev.event,count:event.data.length},news:{...prev.ne
 
         {/* Upcoming Events */}
         <div className="bg-white shadow rounded-lg p-5">
-          <h2 className="text-lg font-semibold mb-3">Upcoming Events</h2>
+          <h2 className="text-lg font-semibold mb-3">Events</h2>
           <ul className="space-y-2">
             {Events?.map((event) => (
               <li key={event.id} className="border-b pb-2">
                 <p className="font-medium">{event.title}</p>
-                <p className="text-gray-500 text-sm">{event.date}</p>
+                <p className="text-gray-500 text-sm">{event.date.split("T")[0].toString()}</p>{
+
+                }
               </li>
             ))}
           </ul>

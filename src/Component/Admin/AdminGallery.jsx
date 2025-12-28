@@ -27,7 +27,7 @@ const AdminGalleryPanel = () => {
       try {
         const res = await fetch("https://backendleadershiphub-2.onrender.com/gallery/getdata");
         const data = await res.json();
-        console.log(data,"this isthe gallery data")
+        console.log(data,"this is the gallery data")
         if (data.success) {
           setGalleryData(data.data || []);
         }
@@ -57,6 +57,7 @@ const AdminGalleryPanel = () => {
 
   const handleGalleryChange = (e) => {
     const files = Array.from(e.target.files);
+    console.log(files,"these are the")
     const newPreviews = files.map((file) => URL.createObjectURL(file));
     setFormData((prev) => ({
       ...prev,
@@ -75,6 +76,7 @@ const AdminGalleryPanel = () => {
 
   // --- EDIT ACTION ---
   const handleEditClick = (item) => {
+
     console.log(item ,"this is the item to be edited")
     setIsEditing(true);
     setCurrentId(item._id);
@@ -237,7 +239,8 @@ const AdminGalleryPanel = () => {
                   <div className="grid grid-cols-3 gap-2 max-h-40 overflow-y-auto p-2 border rounded bg-slate-50">
                     {formData.galleryPreviews.map((src, idx) => (
                       <div key={idx} className="relative group h-16">
-                        <img src={src} className="w-full h-full object-cover rounded" alt="Gallery" />
+                        
+                        <img src={src?.url || src} className="w-full h-full object-cover rounded" alt="Gallery" />
                         <button type="button" onClick={() => removeGalleryImage(idx)} className="absolute -top-1 -right-1 bg-black text-white rounded-full w-4 h-4 text-[10px]">✕</button>
                       </div>
                     ))}

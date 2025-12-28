@@ -11,9 +11,9 @@ const Home = () => {
     queryFn : fetchHomeData
     }
   )
-  console.log(data?.data[0],"is the data")
-  console.log(data?.data[0],"this is the final data")
-  if (loading)  Loading
+ 
+  
+  if (loading)  <Loading/>
   return (
     <div className='md:w-[85%] md:mx-auto'>
      <Herosection herodata={data?.data[0]?.hero}/>

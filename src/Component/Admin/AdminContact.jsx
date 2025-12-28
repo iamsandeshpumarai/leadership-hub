@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import toast, { Toaster } from 'react-hot-toast'; 
+import toast from 'react-hot-toast'; 
 import api from "../../../utils/api";
 
 const NEPAL_PROVINCES = ["Koshi Province", "Madhesh Province", "Bagmati Province", "Gandaki Province", "Lumbini Province", "Karnali Province", "Sudurpaschim Province"];
@@ -79,7 +79,7 @@ const AdminContactPanel = () => {
 
   return (
     <div className="max-w-5xl mx-auto p-8 bg-gray-50 min-h-screen space-y-8 mt-10 rounded-xl shadow-xl border border-gray-200">
-      <Toaster position="top-right" />
+      
       
       <div className="border-b pb-4">
         <h2 className="text-3xl font-bold text-blue-800">🏢 Admin Contact Management</h2>

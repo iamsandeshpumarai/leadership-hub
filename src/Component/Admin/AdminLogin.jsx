@@ -28,15 +28,16 @@ const datasend = useMutation({
   mutationKey:["authkey"],
   mutationFn: logInMutation
   ,
-  onSuccess: (data)=>{
+  onSuccess: ()=>{
     queryClient.invalidateQueries(["auth"])
     toast.success("Logged In Sucessfully")
     navigate("/admin")
-    console.log(data)
+    
   },
   onError: (data)=>{
-    toast.error("got failed")
-    console.log(data)
+    toast.error(data?.response?.data?.message)
+    console.log(data?.response?.data?.message)
+    setIsLoading(false)
   }
 })
 

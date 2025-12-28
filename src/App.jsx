@@ -19,27 +19,29 @@ import AdminContactPanel from './Component/Admin/AdminContact';
 import AdminHomePanel from './Component/Admin/AdminHome';
 import AdminBookStorePanel from './Component/Admin/AdminBookStore';
 import AdminLogin from './Component/Admin/AdminLogin';
-import {ProtectRoute} from './Context/ProtectRoute';
+import { ProtectRoute } from './Context/ProtectRoute';
 import { Toaster } from 'react-hot-toast';
 import Setting from './Component/Admin/Setting';
+import MessageDashboard from './Component/Admin/Admininquirymessage';
 
 const App = () => {
-
-
   const { pathname } = useLocation();
-  const Adminlogin = pathname === "/login" || pathname.startsWith("/admin");
+  
+  // This ensures Header/Footer hide for login and all admin sub-routes
+  const isAdminPath = pathname === "/login" || pathname.startsWith("/admin");
 
   return (
     <div>
-      <Toaster position='top-right'/>
-      <ScrollToTop/>
-      {!Adminlogin && <Header/>}
+      <Toaster position='top-right' />
+      <ScrollToTop />
+      
+      {!isAdminPath && <Header />}
 
-      <main className="">
+      <main>
         <Routes>
           {/* Public routes */}
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={ <AdminLogin/>  } />
+          <Route path="/login" element={<AdminLogin />} />
           <Route path="/biography" element={<Biography />} />
           <Route path="/events" element={<Events />} />
           <Route path="/gallery" element={<Gallery />} />
@@ -47,7 +49,7 @@ const App = () => {
           <Route path="/contact" element={<Contactpage />} />
           <Route path="/bookstore" element={<Bookstore />} />
 
-          {/* Admin routes */}
+          {/* Admin routes - Nested inside AdminLayout and ProtectRoute */}
           <Route 
             path="/admin" 
             element={
@@ -65,11 +67,13 @@ const App = () => {
             <Route path="contact" element={<AdminContactPanel />} />
             <Route path="homes" element={<AdminHomePanel />} />
             <Route path="bookstore" element={<AdminBookStorePanel />} />
+            {/* Added Inquiry Dashboard here */}
+            <Route path="inquiry" element={<MessageDashboard />} />
           </Route>
         </Routes>
       </main>
 
-      {!Adminlogin && <Footer />}
+      {!isAdminPath && <Footer />}
     </div>
   );
 };

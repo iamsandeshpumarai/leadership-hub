@@ -59,8 +59,8 @@ console.log(contactData,"this is mine contactdata")
         </div>
 
         {/* Map / Location */}
-        <div className="mb-8 border border-red-600 rounded overflow-hidden">
-          <MapContainer center={coords} zoom={15} style={{ height: '400px', width: '100%' }}>
+        <div className="mb-8 border border-red-600 rounded overflow-hidden ">
+          <MapContainer center={coords} zoom={15} style={{ height: '400px', width: '100%',zIndex:0 }}>
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
