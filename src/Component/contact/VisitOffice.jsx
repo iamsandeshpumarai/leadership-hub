@@ -14,7 +14,6 @@ L.Icon.Default.mergeOptions({
 
 const VisitOfficeSection = ({ contactData }) => {
   const [coords, setCoords] = useState([27.7172, 85.3240]); // Default Kathmandu
-console.log(contactData,"this is mine contactdata")
   const city = contactData.cityState || 'Kathmandu, Nepal';
   const popupContent = contactData?.visitDescription.replace('Interactive Map\n', '') || city;
   const heading = contactData.visitHeading;
@@ -23,14 +22,14 @@ console.log(contactData,"this is mine contactdata")
     const fetchCoords = async () => {
       try {
         const res = await fetch(
-          `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}`
+          `https://backendleadershiphub-2.onrender.com/api/location/${encodeURIComponent(city)}`
         );
         const data = await res.json();
         if (data.length > 0) {
           setCoords([parseFloat(data[0].lat), parseFloat(data[0].lon)]);
         }
       } catch (error) {
-        console.error('Failed to fetch coordinates:', error);
+        console.error('Failed to fetch coordinates:', error.message);
       }
     };
     fetchCoords();
@@ -39,7 +38,7 @@ console.log(contactData,"this is mine contactdata")
   // Highlights from data
   const highlights = [
     { value: contactData.location, label: 'Location' },
-    { value: 'Accessible', label: contactData.Accessible },
+    { value:contactData.Accessible , label: 'Accessible By Transport' },
     { value: 'Parking', label: contactData.Parking },
   ];
 

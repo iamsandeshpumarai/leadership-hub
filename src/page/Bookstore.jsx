@@ -3,8 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import PublishedWorks from "../Component/Bookstore/PublishedWork";
 import BooksSection from "../Component/Bookstore/BookSection";
 import AboutAuthor from "../Component/Bookstore/AboutAuthor";
-
 import { fetchAuthorData, fetchBooks } from "../../utils/fetchData";
+import Loading from "../Shared/Loading";
 
 
 
@@ -23,7 +23,7 @@ const Bookstore = () => {
 
 
   if (isLoading)
-    return <div className="text-center mt-[90px]">Loading books...</div>;
+    return <Loading/>;
 
   if (isError)
     return (

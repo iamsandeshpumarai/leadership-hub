@@ -12,7 +12,7 @@ const NewsCard = ({ news }) => {
       <div className="bg-white border border-red-200 hover:shadow-lg transition-all duration-300 overflow-hidden group">
         <div className="flex">
           {/* Icon Section */}
-          <div className="w-1/3 h-32 bg-gradient-to-br from-red-200 to-red-300 flex items-center justify-center">
+          <div className="w-1/3 h-35 bg-gradient-to-br from-red-200 to-red-300 flex items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

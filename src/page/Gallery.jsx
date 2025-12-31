@@ -4,6 +4,7 @@ import GalleryFilter from "../Component/Section/GalleryFilter";
 import { useQuery } from "@tanstack/react-query";
 
 import { fetchGallery } from "../../utils/fetchData";
+import Loading from "../Shared/Loading";
 
 const Gallery = () => {
   // Fetch API data using useQuery
@@ -11,8 +12,8 @@ const Gallery = () => {
     queryKey: ["galleryData"],
     queryFn: fetchGallery
   });
-console.log(data?.data.data,"is the data")
-  if (isLoading) return <p className="text-center mt-10">Loading...</p>;
+
+  if (isLoading) return <Loading/>
   if (error) return <p className="text-center mt-10">Error loading gallery data</p>;
 
   // Pass down the actual array to child component

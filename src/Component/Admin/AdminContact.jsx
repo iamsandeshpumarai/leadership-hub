@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import toast from 'react-hot-toast'; 
 import api from "../../../utils/api";
+import Loading from "../../Shared/Loading";
+
 
 const NEPAL_PROVINCES = ["Koshi Province", "Madhesh Province", "Bagmati Province", "Gandaki Province", "Lumbini Province", "Karnali Province", "Sudurpaschim Province"];
 const NEPAL_CITIES = ["Kathmandu, Nepal", "Lalitpur, Nepal", "Bhaktapur, Nepal", "Pokhara, Nepal", "Biratnagar, Nepal", "Bharatpur, Nepal", "Birgunj, Nepal", "Dharan, Nepal", "Nepalgunj, Nepal", "Butwal, Nepal", "Hetauda, Nepal", "Janakpur, Nepal", "Dhangadhi, Nepal"];
+
 
 const initialFormData = {
   officeAddress: "",
@@ -11,8 +14,8 @@ const initialFormData = {
   cityState: "Kathmandu, Nepal",
   phoneNumbers: [{ number: "", type: "Office" }],
   emails: [{ address: "" }],
-  hoursSummary: "Sunday - Friday: 09:00 AM - 05:00 PM",
-  closedDaysSummary: "Closed on Saturdays and Public Holidays",
+  hoursSummary: "Sunday - Thursday: 10:00 AM - 5:00 PM",
+  closedDaysSummary: "Friday 10:00 AM - 3:00 PM",
   Parking: "Available",
   Accessible: "By Public Transport",
   location: "Central",
@@ -20,14 +23,16 @@ const initialFormData = {
   visitDescription: "Interactive Map\nKathmandu, Bagmati Province, Nepal",
   // New Footer Data
   footerGmail: "contact@girirajpokhrel.com",
-  footerPhone: "+977-01-XXXXXXX",
-  footerLocation: "Campaign Office, Main Street, City"
+  footerPhone: "+977-1-4602290 (Koteshwor Party HQ)",
+  footerLocation: "Singha Durbar Complex, Central Kathmandu, Nepal"
 };
+
 
 const AdminContactPanel = () => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
 
+  console.log(formData)
   useEffect(() => { fetchContactData(); }, []);
 
   const fetchContactData = async () => {
@@ -75,7 +80,7 @@ const AdminContactPanel = () => {
     }
   };
 
-  if (loading) return <div className="text-center p-10 text-blue-600 font-medium">Loading Admin Panel...</div>;
+  if (loading) return<Loading/>;
 
   return (
     <div className="max-w-5xl mx-auto p-8 bg-gray-50 min-h-screen space-y-8 mt-10 rounded-xl shadow-xl border border-gray-200">

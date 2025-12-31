@@ -2,10 +2,12 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import api from "../../../utils/api";
 import toast from 'react-hot-toast';
+import Loading from "../../Shared/Loading";
 
 // --- Utility Functions ---
 
 const extractDateParts = (dateValue) => {
+    
     if (!dateValue) return { day: "", month: "" };
     try {
         const dateObj = new Date(dateValue);
@@ -161,6 +163,7 @@ const AdminEventsPanel = () => {
         queryKey: ["eventsdata"],
         queryFn: async () => {
             const response = await api.get("/event/getevent");
+            console.log(response?.data?.data,'this is the response from event data');
             return (response?.data?.data || []).map(e => ({
                 ...e,
                 ...extractDateParts(e.date)
@@ -242,7 +245,7 @@ const AdminEventsPanel = () => {
         updateMutation.mutate({ id, formData });
     };
 
-    if (isLoading) return <div className="text-center text-xl p-10 text-blue-600">Loading Events... 🔄</div>;
+    if (isLoading) return <Loading/>;
 
     return (
         <div className="max-w-7xl mx-auto p-8 bg-gray-50 min-h-screen space-y-10">

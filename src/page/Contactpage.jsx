@@ -13,9 +13,9 @@ const fallback = {
   province: "Bagmati Province",
   cityState: "Kathmandu, Nepal",
   phoneNumbers: [
-    { number: "+977-1-XXXXXXX", type: "Office" },
-    { number: "+977-98XXXXXXXX", type: "Mobile" },
-    { number: "+977-1-XXXXXXX", type: "Fax" },
+    { number: "+977-1-XXXXXXX"},
+    { number: "+977-98XXXXXXXX"},
+    { number: "+977-1-XXXXXXX"},
   ],
   emails: [
     { address: "office@girirajmanipokharel.np" },
@@ -23,16 +23,11 @@ const fallback = {
     { address: "media@girirajmanipokharel.np" },
   ],
   officeHours: [
-    { day: "Sunday", openTime: "", closeTime: "", isClosed: true },
-    { day: "Monday", openTime: "09:00", closeTime: "17:00", isClosed: false },
-    { day: "Tuesday", openTime: "09:00", closeTime: "17:00", isClosed: false },
-    { day: "Wednesday", openTime: "09:00", closeTime: "17:00", isClosed: false },
-    { day: "Thursday", openTime: "09:00", closeTime: "17:00", isClosed: false },
-    { day: "Friday", openTime: "09:00", closeTime: "17:00", isClosed: false },
-    { day: "Saturday", openTime: "10:00", closeTime: "14:00", isClosed: false },
+    { day: "Sunday - Thursday", time: "10:00 AM - 5:00 PM" },
+    { day: "Friday", time: "10:00 AM - 3:00 PM" },
   ],
   Parking: "Available",
-  Accessible: "By Public Transport",
+  Accessible: "Accessible",
   location: "Central",
   visitHeading:
     "Our office is located in the heart of Kathmandu. We welcome scheduled visits and meetings during our regular office hours.",
@@ -40,13 +35,12 @@ const fallback = {
 };
 
 const ContactPage = () => {
-  const { data, isError } = useQuery({
+  const { data} = useQuery({
     queryKey: ["contactdata"],
     queryFn: contactDatas
   });
 
-  const contactData = !isError && data ? data?.data?.data : fallback;
-  console.log(contactData,"is the contact data")
+  const contactData =  data?.data?.data || fallback;
 
   return (
     <>

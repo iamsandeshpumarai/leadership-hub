@@ -16,7 +16,7 @@ createRoot(document.getElementById('root')).render(
     <App />
   </StrictMode>
   </HashRouter>
-   <ReactQueryDevtools initialIsOpen={false} /> {/* Open/close by default */}
+   <ReactQueryDevtools initialIsOpen={false} /> 
 </AuthProvider>
   </QueryClientProvider>
 )

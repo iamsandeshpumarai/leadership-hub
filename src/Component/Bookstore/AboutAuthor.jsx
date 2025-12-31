@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AboutAuthor = ({ authorData  }) => {
-  console.log(authorData.data?.aboutauthor,"is the authordata")
+  
   // Dynamically map authortags to features
   const authorFeatures = authorData?.data?.authortags?.map((tag) => {
     let icon;

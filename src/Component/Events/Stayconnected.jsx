@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const StayConnected = () => {
+ const navigate =  useNavigate()
   return (
     <section className="py-20 bg-red-800 mt-12">
       {/* Container */}
@@ -25,7 +27,7 @@ const StayConnected = () => {
           
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-red-800 hover:bg-red-100 px-8 py-3 font-medium tracking-wide transition-all duration-200">
+            <button onClick={()=>navigate("/contact")} className="bg-white text-red-800 hover:bg-red-100 px-8 py-3 font-medium tracking-wide transition-all duration-200">
               VOLUNTEER WITH US
             </button>
           </div>

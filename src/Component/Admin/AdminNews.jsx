@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo } from "react";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import api from "../../../utils/api"; // Assuming 'api' handles authentication and base URL
 import toast from "react-hot-toast";
+import Loading from "../../Shared/Loading";
 
 // --- Utility Functions ---
 
@@ -160,7 +161,7 @@ const AdminNewsPanel = () => {
             toast.success("News added successfully!");
             // Prepend the new item (from server response) to the local list
             setNewsList(prev => [response.data.data, ...prev]); 
-            setNewNews({ title: "", date: "", description: "",newsurl:"" });
+            setNewNews({ title: "", date: "", description: "",newsurl:"", });
             // Invalidate the query to keep cached data fresh
             queryClient.invalidateQueries(["newsdata"]);
         },
@@ -236,7 +237,7 @@ const AdminNewsPanel = () => {
     };
 
 
-    if (isLoading) return <div className="text-center text-xl p-10 text-blue-600">Loading News Data... 🔄</div>;
+    if (isLoading) return <Loading/>
     if (error) return <div className="text-center text-xl p-10 bg-blue-100 border border-blue-400 text-blue-700 rounded-lg">Error fetching news: {error.message}</div>;
 
     return (

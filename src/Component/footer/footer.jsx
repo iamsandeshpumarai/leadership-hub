@@ -87,11 +87,7 @@ function Footer() {
       {/* Copyright Section */}
       <div className="mt-8 pt-4 border-t border-primary-800 text-sm md:flex justify-between text-white">
         <div>© 2025 Giriraj Mani Pokhrel. All rights reserved.</div>
-        <div className="md:flex gap-2 text-white block">
-          <Link to="/"  className="hover:text-[#FF4930]">Privacy Policy</Link>
-          <Link to="/" className="hover:text-[#FF4930]">Terms of Service</Link>
-          <Link to="/" className="hover:text-[#FF4930]">Campaign Finance Disclaimer</Link>
-        </div>
+      
       </div>
     </footer>
   );

@@ -121,7 +121,7 @@ const iconMap = {
 };
 
 const ExperienceCard = ({listexpn}) => {
-  console.log(listexpn,'this is the list of experience')
+  
   return (
     <div className="grid lg:grid-cols-2 gap-8">
       {listexpn?.map((card, index) => (

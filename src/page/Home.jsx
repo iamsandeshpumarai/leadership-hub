@@ -12,7 +12,6 @@ const Home = () => {
     }
   )
  
-  
   if (loading)  <Loading/>
   return (
     <div className='md:w-[85%] md:mx-auto'>

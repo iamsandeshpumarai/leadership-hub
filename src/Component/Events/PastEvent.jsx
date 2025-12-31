@@ -1,38 +1,90 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import api from "../../../utils/api";
 import { fetchEvents } from "../../../utils/fetchData";
 import Loading from "../../Shared/Loading";
 
 // --- Default / Fallback Data ---
 const defaultEventsData = [
-  {
-    id: 1,
-    title: "Clean City Campaign",
-    date: "Saturday, June 28, 2025",
-    day: "28",
-    month: "Jun",
-    description: "Join our movement to clean and beautify our city with local volunteers.",
-    status: "Past Event",
-  },
-  {
-    id: 2,
-    title: "Health Check-up Camp",
-    date: "Saturday, July 5, 2025",
-    day: "5",
-    month: "Jul",
-    description: "Free health check-up camp organized for underprivileged families.",
-    status: "Past Event",
-  },
-  {
-    id: 3,
-    title: "Youth Empowerment Rally",
-    date: "Thursday, July 10, 2025",
-    day: "10",
-    month: "Jul",
-    description: "A large-scale rally focused on empowering the youth with skills and opportunities.",
-    status: "Past Event",
-  },
+  
+    {
+        "_id": "69549d47b8448f9a7aa2aec3",
+        "title": "Address at Global ICT Leadership Forum (Education Promotion)",
+        "date": "2018-11-16T00:00:00.000Z",
+        "day": "16",
+        "month": "Nov",
+        "description": "Spoke at ICT Forum in Seoul promoting Nepal’s education and technologies  initiatives.",
+        "status": "Past Event",
+        "imageUrl": "",
+        "createdAt": "2025-12-31T03:49:27.233Z",
+        "updatedAt": "2025-12-31T03:51:17.536Z",
+        "__v": 0
+    },
+    {
+        "_id": "69549d6eb8448f9a7aa2aec6",
+        "title": "Handing Over Reconstructed School Building (Post-Earthquake)",
+        "date": "2018-04-26T00:00:00.000Z",
+        "day": "26",
+        "month": "Apr",
+        "description": "Inaugurated reconstructed earthquake-resistant school in Gorkha, emphasizing safety and modern facilities.",
+        "status": "Past Event",
+        "imageUrl": "",
+        "createdAt": "2025-12-31T03:50:06.169Z",
+        "updatedAt": "2025-12-31T03:50:06.169Z",
+        "__v": 0
+    },
+    {
+        "_id": "69549d95b8448f9a7aa2aec9",
+        "title": "Visit & Support for Gaushala Engineering College",
+        "date": "2024-01-11T00:00:00.000Z",
+        "day": "11",
+        "month": "Jan",
+        "description": "Visited Gaushala Engineering College to support civil engineering programs and higher education.",
+        "status": "Past Event",
+        "imageUrl": "",
+        "createdAt": "2025-12-31T03:50:45.408Z",
+        "updatedAt": "2025-12-31T03:50:45.408Z",
+        "__v": 0
+    },
+    {
+        "_id": "69549e53b8448f9a7aa2aee6",
+        "title": "Organizational Strengthening & Public Outreach Campaign",
+        "date": "2023-03-04T00:00:00.000Z",
+        "day": "4",
+        "month": "Mar",
+        "description": "Inaugurated party-level outreach campaign in Mechinagar, promoting community engagement and addressing local inequality issues.",
+        "status": "Past Event",
+        "imageUrl": "",
+        "createdAt": "2025-12-31T03:53:55.957Z",
+        "updatedAt": "2025-12-31T03:53:55.957Z",
+        "__v": 0
+    },
+    {
+        "_id": "69549e72b8448f9a7aa2aee9",
+        "title": "CPN (Maoist Centre) Central Committee Meeting Announcement",
+        "date": "2022-06-03T00:00:00.000Z",
+        "day": "3",
+        "month": "Jun",
+        "description": "Announced virtual Central Committee meeting after nationwide leader training, focusing on committee finalization.",
+        "status": "Past Event",
+        "imageUrl": "",
+        "createdAt": "2025-12-31T03:54:26.766Z",
+        "updatedAt": "2025-12-31T03:54:26.766Z",
+        "__v": 0
+    },
+    {
+        "_id": "69549e92b8448f9a7aa2aeec",
+        "title": "Teach For Nepal Children’s Day Event",
+        "date": "2019-09-15T00:00:00.000Z",
+        "day": "15",
+        "month": "Sep",
+        "description": "Served as chief guest promoting volunteer teaching and rural education on National Children’s Day.",
+        "status": "Past Event",
+        "imageUrl": "",
+        "createdAt": "2025-12-31T03:54:58.547Z",
+        "updatedAt": "2025-12-31T03:54:58.547Z",
+        "__v": 0
+    }
+
 ];
 
 // --- Fetch Function ---
@@ -51,8 +103,7 @@ const PastEvents = () => {
   // Decide which data to render (API data or Default)
   // If the API returns an empty array (length 0), we might still want to show default data?
   // For now, standard behavior is: if API succeeds, show API data.
-  const displayEvents =  data?.data.data
-  console.log(data?.data.data,"this si the events data")
+  const displayEvents =  data?.data.data || defaultEventsData;
 
   // Helper to format ISO dates (like 2025-10-28...) to readable strings
   const formatDate = (dateString) => {

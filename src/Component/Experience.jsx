@@ -2,7 +2,59 @@ import React from 'react'
 import ExperienceCard from './ExperienceCard'
 
 const Experience = ({expndata}) => {
-  console.log(expndata,"this is experience data")
+  
+ const DEFAULT_EXPN_DATA = {
+  politicalHighlihtTitle: "Party Leadership",
+  headerTag: "EXPERIENCE & LEADERSHIP",
+  headerTitle: "A Legacy of",
+  headerHighlight: "Public Services",
+  headerDescription:
+    "From healthcare ministry to constitutional development, a distinguished career spanning multiple government formations and party leadership roles, dedicated to serving Nepal's democratic progress.",
+
+  cards: [
+    {
+      title: "Minister of Health and Population",
+      organization: "Government of Nepal",
+      period: "2007-2009",
+      icon: "heart",
+      description:
+        "Led national healthcare initiatives and population policies. Served two terms under different government formations.",
+      keyAchievements: [
+        { text: "Healthcare Policy Reform" },
+        { text: "Population Management" },
+        { text: "Public Health Initiatives" }
+      ],
+      order: 0
+    },
+    {
+      title: "Member of Constituent Assembly",
+      organization: "Mahottari-1 Constituency",
+      period: "2008",
+      icon: "building",
+      description:
+        "Elected representative contributing to Nepal's constitutional framework and democratic transition.",
+      keyAchievements: [
+        { text: "Constitutional Development" },
+        { text: "Democratic Governance" },
+        { text: "Legislative Leadership" }
+      ],
+      order: 1
+    }
+  ],
+
+  politicalFirstTitle: "Political Journey",
+  politicalJourney:
+    "Giriraj Mani Pokharel's political career reflects Nepal's democratic evolution.",
+
+  timeline: [
+    { year: "2007", label: "First Ministerial Appointment" },
+    { year: "2009", label: "Party Unification Leadership" },
+    { year: "Present", label: "Senior Party Leadership" }
+  ]
+};
+
+  const data = expndata || DEFAULT_EXPN_DATA
+
     return (
         <>
         
@@ -20,19 +72,19 @@ const Experience = ({expndata}) => {
             <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/>
           </svg>
           <span class="text-red-700 font-medium text-sm tracking-wide">
-            {expndata?.headerTag}
+            {data?.headerTag}
           </span>
         </div>
 
         <h2 class="text-3xl lg:text-4xl font-light text-slate-900 mb-6">
-          {expndata?.headerTitle}
-          <span class="font-normal text-red-800 ml-2">{expndata?.headerHighlight}</span>
+          {data?.headerTitle}
+          <span class="font-normal text-red-800 ml-2">{data?.headerHighlight}</span>
         </h2>
 
         <div class="w-16 h-0.5 bg-white0 mx-auto mb-6"></div>
 
         <p class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
-          {expndata?.headerDescription}
+          {data?.headerDescription}
         </p>
       </div>
 
@@ -44,19 +96,19 @@ const Experience = ({expndata}) => {
         <div class="max-w-4xl mx-auto text-center">
 
           <h3 class="text-2xl font-light text-white mb-6">
-            {expndata?.politicalFirstTitle}
-            <span class="font-normal text-red-200 ml-2">{expndata?.politicalHighlihtTitle}</span>
+            {data?.politicalFirstTitle}
+            <span class="font-normal text-red-200 ml-2">{data?.politicalHighlihtTitle}</span>
           </h3>
 
           <div class="w-16 h-0.5 bg-red-400 mx-auto mb-8"></div>
 
           <p class="text-red-100 leading-relaxed text-lg mb-8">
-          {expndata?.politicalJourney}
+          {data?.politicalJourney}
           </p>
 
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
 {
-  expndata?.timeline.map((data,index)=>{
+  data?.timeline.map((data,index)=>{
     return <>
                 <div key={index}>
               <div class="text-3xl font-light text-white mb-2">{data.year}</div>

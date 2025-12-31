@@ -24,7 +24,7 @@ const ContactInfoCard = ({ icon, title, items }) => {
 
 // Main Component with logic to prioritize summary fields for hours
 const ContactInfoSection = ({ contactData }) => {
-  console.log(contactData)
+  
 
   // 1. Office Address 
   const officeAddressItems = [

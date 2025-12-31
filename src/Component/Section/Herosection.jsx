@@ -5,17 +5,19 @@ const Herosection = ({ herodata }) => {
     const navigate = useNavigate()
 
     // Destructuring or providing defaults from your specific JSON structure
-    const tag = herodata?.headerTag || "EXPERIENCE & LEADERSHIP";
-    const titleBase = herodata?.headerHalfTitle || "A Legacy of";
-    const titleHighlight = herodata?.headerHighlight || "Public Service";
-    const subtitle = herodata?.politicalHighlihtTitle || "Party Leadership";
-    const description = herodata?.headerDescription || "From healthcare ministry to constitutional development, a distinguished career spanning multiple government formations and party leadership roles, dedicated to serving Nepal's democratic progress.";
+    const tag =   herodata?.tag || "Nepalese Politician" ;
+    const Name =   herodata?.firstName || "Giriraj Mani";
+    const HighlightName =   herodata?.nameHighlight || "Pokhrel";
+    const Position = herodata?.position|| "Former Minister & Constitutional Assembly Member"  ;
+    const description = herodata?.description || "Former Minister of Education, Science, Technology, Health, PopulationMember of Constitutional Assembly and founding chairman Adharshila.";
     
     // Mapping Stats from the "cards" array or providing defaults
-    const statYears = "15+"; // Defaulting as it's not a direct key in JSON
-    const statTerms = "2";   // Based on your description "two terms"
-    const statRoles = herodata?.cards?.length || "4";
+    const statYears = herodata?.stats[0].years || "15+";  // Defaulting as it's not a direct key in JSON
+    const statTerms = herodata?.stats[0].terms ||"3";   // Based on your description "two terms"
+    const statRoles = herodata?.stats[0].roles ||  "Multiple";
+    const imageUrl = herodata?.imageUrl || imageplaceholder
 
+const imageDesc = herodata?.imageDesc || "Former Minister of Education, Science, Technology, Health, PopulationMember of Constitutional Assembly and founding chairman Adharshila."
     return (
         <div className="font-sans p-4 md:p-8 mt-[70px]">
             <div className="max-w-7xl mx-auto rounded-xl overflow-hidden">
@@ -34,11 +36,11 @@ const Herosection = ({ herodata }) => {
 
                         {/* Title Block */}
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-800 leading-tight">
-                            {titleBase} <span className="text-red-700">{titleHighlight}</span>
+                            {Name} <span className="text-red-700">{HighlightName}</span>
                         </h1>
                         
                         <p className="text-xl font-medium text-gray-700">
-                            {subtitle}
+                            {Position}
                         </p>
 
                         {/* Description */}
@@ -81,7 +83,7 @@ const Herosection = ({ herodata }) => {
                     {/* RIGHT COLUMN: Responsive Image Section */}
                     <div className="relative h-96 md:h-auto overflow-hidden">
                         <img 
-                            src={herodata?.imageUrl || imageplaceholder} 
+                            src={imageUrl} 
                             alt="Public servant profile" 
                             className="w-full h-full object-cover"
                             onError={(e) => {
@@ -94,7 +96,7 @@ const Herosection = ({ herodata }) => {
                         <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-70 text-white p-4">
                             <p className="font-bold text-sm">{herodata?.captionName || "Giriraj Mani Pokharel"}</p>
                             <p className="text-xs mt-1 text-gray-300">
-                                {herodata?.imageDesc || "Standing Committee Member & Former Minister"}
+                                {imageDesc}
                             </p>
                         </div>
                     </div>
