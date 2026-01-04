@@ -23,6 +23,8 @@ import { ProtectRoute } from './Context/ProtectRoute';
 import { Toaster } from 'react-hot-toast';
 import Setting from './Component/Admin/Setting';
 import MessageDashboard from './Component/Admin/Admininquirymessage';
+import TermsOfService from './page/Terms';
+import PrivacyPolicy from './page/Policy';
 
 const App = () => {
   const { pathname } = useLocation();
@@ -37,10 +39,12 @@ const App = () => {
       
       {!isAdminPath && <Header />}
 
-      <main>
+      <main >
         <Routes>
           {/* Public routes */}
           <Route path="/" element={<Home />} />
+          <Route path="/terms" element={<TermsOfService />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/login" element={<AdminLogin />} />
           <Route path="/biography" element={<Biography />} />
           <Route path="/events" element={<Events />} />
